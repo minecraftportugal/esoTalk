@@ -57,3 +57,4 @@ addons/libraries/*
 ehthumbs.db
 Thumbs.db
 *~
+.idea
