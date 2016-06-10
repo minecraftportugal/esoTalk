@@ -234,7 +234,7 @@ if (!$conversation["canReply"]) {
 			"id" => "reply",
 			"class" => "logInToReply",
 			"title" => "",
-			"body" => sprintf(T("message.logInToReply"), URL("user/login?return=".urlencode($this->selfURL)), URL("user/join?return=".urlencode($this->selfURL))),
+			"body" => sprintf(T("message.logInToReply"), URL("user/login?return=".urlencode($this->selfURL)), URL("//www.mcpt.eu/registo")),
 			"avatar" => avatar()
 		);
 

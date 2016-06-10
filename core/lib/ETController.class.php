@@ -276,7 +276,7 @@ public function init()
 
 		// If the user IS NOT logged in, add the 'login' and 'sign up' links to the bar.
 		if (!ET::$session->user) {
-			$this->addToMenu("user", "join", "<a href='".URL("user/join?return=".urlencode($this->selfURL))."' class='link-join'>".T("Sign Up")."</a>");
+			$this->addToMenu("user", "join", "<a href='".URL("//www.mcpt.eu/registo")."' class='link-join'>".T("Sign Up")."</a>");
 			$this->addToMenu("user", "login", "<a href='".URL("user/login?return=".urlencode($this->selfURL))."' class='link-login'>".T("Log In")."</a>");
 		}
 
@@ -471,7 +471,7 @@ public function render($view = "")
 			$logo = C("esoTalk.forumLogo");
 			$title = C("esoTalk.forumTitle");
 			if ($logo) $size = getimagesize($logo);
-			$data["forumTitle"] = $logo ? "<img src='".getWebPath($logo)."' {$size[3]} alt='$title'/>" : $title;
+			$data["forumTitle"] = $logo ? "<img src='".getWebPath($logo)."' {$size[3]} alt='$title'/> $title" : $title;
 
 			// Add the details for the "back" button.
 			$data["backButton"] = ET::$session->getNavigation($this->navigationId);

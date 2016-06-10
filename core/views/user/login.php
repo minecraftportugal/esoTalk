@@ -55,7 +55,7 @@ foreach ($form->getFieldsInSection($k) as $field): ?>
 </div>
 
 <div class='buttons'>
-<small><?php printf(T("Don't have an account? <a href='%s' class='link-join'>Sign up!</a>"), URL("user/join")); ?></small>
+<small><?php printf(T("Don't have an account? <a href='%s' class='link-join'>Sign up!</a>"), URL("//www.mcpt.eu/registo")); ?></small>
 <?php
 echo $form->button("login", T("Log In"), array("class" => "big submit"));
 echo $form->cancelButton();

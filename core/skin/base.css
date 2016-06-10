@@ -396,7 +396,7 @@ negative margins so they overlap the padding of the <li>. */
 .allowedList {line-height:1em; font-size:100%; overflow:hidden}
 .allowedList .avatar {margin-right:0}
 .allowedList .avatars {margin:0 5px 5px 0}
-.allowedList .name img {margin-right:5px}
+.allowedList .name .avatar.thumb {margin-right:5px}
 .allowedList.editing .name, .allowedList.popup .name {display:block; margin-bottom:5px}
 .allowedList.editing .name {float:left; width:33%; overflow:hidden; white-space:nowrap}
 a.deleteLink:hover {color:#f00 !important; text-decoration:line-through}

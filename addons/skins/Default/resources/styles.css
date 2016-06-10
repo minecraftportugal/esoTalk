@@ -10,7 +10,9 @@ body {font-size:14px; font-weight:300; margin:0; overflow-y:scroll; background:#
 body, input, textarea, select {font-family:open sans,lucida grande,lucida sans unicode,helvetica,arial,sans-serif}
 input, textarea, select {font-size:100%}
 strong {font-weight:600}
+b {font-weight:600}
 
+a i {margin-right:5px;}
 
 /* Links */
 a {text-decoration:none}
@@ -78,14 +80,16 @@ p, ul, pre {line-height:1.6em}
 
 /* Header */
 #hdr {background:#fff; position:fixed; width:100%; z-index:100; border-bottom:1px solid}
-#hdr-inner {padding-right:580px;}
-#hdr h1 {display:inline-block; max-width:100%; font-size:20px; padding:14px 0; margin:0; font-weight:300; overflow:hidden; white-space:nowrap; text-overflow:ellipsis}
-#hdr h1 img {display:inline; vertical-align:-5px; margin-right:5px; border:0}
+#hdr-inner {padding-right:580px; white-space:nowrap; height:60px;}
+#hdr h1 {display:inline-block; max-width:100%; font-size:20px; padding:12px 0; margin:0; font-weight:300; overflow:hidden; white-space:nowrap; text-overflow:ellipsis}
+#hdr h1 img {display:inline; vertical-align:-13px; margin-right:5px; border:0}
 #hdr h1 span {margin-left:10px}
-#backButton {float:left; margin-right:10px; margin-left:-30px; font-size:20px; line-height:20px; margin-top:17px; text-decoration:none}
+#backButton {float:left; margin-right:10px; margin-left:-30px; font-size:20px; line-height:20px; margin-top:22px; text-decoration:none}
+#forumTitle a div {display: inline; line-height:39px; margin-left:12px;}
+#forumTitle a {display:inline; line-height:38px;}
 
 #mainMenu {margin-left:30px; display:inline; padding:18px 0}
-#userMenu {float:right; padding:18px 0; margin-right:-580px; margin-left:-18px;}
+#userMenu {float:right; padding:20px 0; margin-right:-580px; margin-left:-18px;}
 #userMenu .item-user {font-weight:600}
 #userMenu .item-user .avatar {vertical-align:middle; margin:-5px 8px -5px 0}
 #userMenu.menu > li {margin-left:18px; text-align:left}

@@ -59,7 +59,7 @@ public function action_login()
 
 	// Add the password field to the form structure. We also use a processing callback on this field to attempt
 	// the login because the password is the specific mechanism of authentication in this instance.
-	$form->addSection("password", T("Password")." <small><a href='".URL("user/forgot")."' class='link-forgot' tabindex='-1'>".T("Forgot?")."</a></small>");
+	$form->addSection("password", T("Password"));
 	$form->addField("password", "password", function($form)
 	{
 		return $form->input("password", "password");

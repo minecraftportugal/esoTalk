@@ -97,6 +97,13 @@ public static $session;
  */
 public static $database;
 
+/**
+ * An instance of the ETDatabase class.
+ * @var ETDatabase
+ */
+public static $loginDatabase;
+
+
 
 /**
  * An instance of the ETCache class.

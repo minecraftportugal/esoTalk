@@ -173,15 +173,58 @@ public function login($name, $password, $remember = false)
 	$return = $this->trigger("login", array($name, $password, $remember));
 	if (count($return)) return reset($return);
 
-	// Get the member with this username or email.
+	$statement = "
+		SELECT *
+		FROM accounts
+		WHERE playername=:name
+		OR email = :email
+		LIMIT 1
+	";
+
+	$statement = ET::$loginDatabase->connection()->prepare($statement);
+	$statement->bindParam(':name', $name);
+	$statement->bindParam(':email', $name);
+	$statement->execute();
+
+	$loginMember = $statement->fetch();
+	if (!$loginMember) {
+		$this->error("password", "incorrectLogin");
+		return false;
+	}
+
 	$sql = ET::SQL()
 		->where("m.username=:username OR m.email=:email")
 		->bind(":username", $name)
 		->bind(":email", $name);
 	$member = reset(ET::memberModel()->getWithSQL($sql));
 
+	if (!$member) {
+		$data = array(
+			"username" => $loginMember['playername'],
+			"email" => $loginMember['email'],
+			"password" => $loginMember['password'],
+			"account" => ACCOUNT_MEMBER,
+			"confirmed" => true
+		);
+
+		// Create the member.
+		$model = ET::memberModel();
+		$memberId = $model->create($data);
+
+		if ($model->errorCount()) {
+			$this->error("password", "incorrectLogin");
+			return false;
+		}
+
+		$sql = ET::SQL()
+			->where("m.username=:username OR m.email=:email")
+			->bind(":username", $name)
+			->bind(":email", $name);
+		$member = reset(ET::memberModel()->getWithSQL($sql));
+	}
+
 	// Check that the password is correct.
-	if (!$member or !ET::memberModel()->checkPassword($password, $member["password"])) {
+	if (!$this->checkPassword($password, $loginMember["password"])) {
 		$this->error("password", "incorrectLogin");
 		return false;
 	}
@@ -474,4 +517,25 @@ public function remove($key)
 	unset($_SESSION[$key]);
 }
 
+/*
+* encryptPassword: encripts a password the same way xauth does it
+*/
+public function encryptPassword($password) {
+	$salt = substr(hash('whirlpool', uniqid(rand(), true)), 0, 12);
+	$hash = hash('whirlpool', $salt . $password);
+	$saltPos = (strlen($password) >= strlen($hash) ? strlen($hash) : strlen($password));
+	return substr($hash, 0, $saltPos) . $salt . substr($hash, $saltPos);
 }
+
+/*
+ * checkPassword: checks a password the same way xauth does it
+ */
+public function checkPassword($checkPass, $realPass) {
+	$saltPos = (strlen($checkPass) >= strlen($realPass) ? strlen($realPass) : strlen($checkPass));
+	$salt = substr($realPass, $saltPos, 12);
+	$hash = hash('whirlpool', $salt . $checkPass);
+	return $realPass == substr($hash, 0, $saltPos) . $salt . substr($hash, $saltPos);
+}
+
+}
+

@@ -45,6 +45,7 @@ public function action_index($orderBy = false, $start = 0)
 
 		$this->trigger("parseTerms", array(&$terms, $sql, &$conditions));
 
+		$hasGroupJoin = false;
 		foreach ($terms as $k => $term) {
 
 			$term = mb_strtolower(trim($term), "UTF-8");
@@ -71,9 +72,10 @@ public function action_index($orderBy = false, $start = 0)
 					$sql->bind(":account$k", $groups[$group]["name"]);
 				}
 				elseif (!$groups[$group]["private"] or ET::groupModel()->groupIdsAllowedInGroupIds(ET::$session->getGroupIds(), $group, true)) {
-					$sql->from("member_group mg", "mg.memberId=m.memberId", "left");
 					$thisCondition[] = "mg.groupId=:group$k";
 					$sql->bind(":group$k", $group);
+
+					$hasGroupJoin = true;
 				}
 			}
 
@@ -85,7 +87,11 @@ public function action_index($orderBy = false, $start = 0)
 
 		}
 
-		$sql->where(implode(" AND ", $conditions));
+		if ($hasGroupJoin) {
+			$sql->from("member_group mg", "mg.memberId=m.memberId", "left");
+		}
+
+		$sql->where(implode(" OR ", $conditions));
 	}
 
 	// Create a query to get the total number of results. Clone the results one to retain the same WHERE conditions.

@@ -21,11 +21,13 @@ $form = $data["form"];
 <li><label><?php echo T("Your current password"); ?></label> <?php echo $form->input("currentPassword", "password"); ?></li>
 
 <li class='sep'></li>
+<?php /*
 
-<li><label><?php echo T("New password"); ?> <small>(<?php echo T("optional"); ?>)</small></label> <?php echo $form->input("password", "password"); ?></li>
+	<li><label><?php echo T("New password"); ?> <small>(<?php echo T("optional"); ?>)</small></label> <?php echo $form->input("password", "password"); ?></li>
 
-<li><label><small><?php echo T("Confirm password"); ?></small></label> <?php echo $form->input("confirm", "password"); ?></li>
+	<li><label><small><?php echo T("Confirm password"); ?></small></label> <?php echo $form->input("confirm", "password"); ?></li>
 
+*/ ?>
 <li><label><?php echo T("New email"); ?> <small>(<?php echo T("optional"); ?>)</small></label> <?php echo $form->input("email"); ?></li>
 
 <li class='sep'></li>

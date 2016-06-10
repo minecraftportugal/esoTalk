@@ -191,6 +191,10 @@ ET::$cache = ETFactory::make($cacheClass ? $cacheClass : "cache");
 ET::$database = ETFactory::make("database");
 ET::$database->init(C("esoTalk.database.host"), C("esoTalk.database.user"), C("esoTalk.database.password"), C("esoTalk.database.dbName"), C("esoTalk.database.prefix"), C("esoTalk.database.connectionOptions"), C("esoTalk.database.port"));
 
+ET::$loginDatabase = ETFactory::make("database");
+ET::$loginDatabase->init(C("esoTalk.database.host"), C("esoTalk.database.user"), C("esoTalk.database.password"), C("esoTalk.database.loginDbName"), "", C("esoTalk.database.connectionOptions"), C("esoTalk.database.port"));
+
+
 // Initialize the session.
 ET::$session = ETFactory::make("session");
 
